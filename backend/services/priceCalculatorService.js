@@ -29,12 +29,16 @@ async function calculateKitchen(request) {
     throw new Error('Kitchen type is required.');
   }
 
+  const wallA = toFeet(request.wallA, request.unit);
+  const wallB = toFeet(request.wallB, request.unit);
+  const wallC = request.wallC ? toFeet(request.wallC, request.unit) : null;
+
   const totalRunningFeet = calculateRunningFeet(
     request.kitchenType,
     request.islandType || null,
-    request.wallA,
-    request.wallB,
-    request.wallC || null
+    wallA,
+    wallB,
+    wallC
   );
 
   const config = await findRate({

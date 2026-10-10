@@ -1,4 +1,0 @@
----
-deployment:
-  tasks:
-    - /bin/echo "Furniture Calculator deployment completed"

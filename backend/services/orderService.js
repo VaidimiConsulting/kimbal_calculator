@@ -114,7 +114,7 @@ async function processOrder(request) {
     console.log(`[OrderService] Sending PDF quotation to customer email: ${request.email}`);
     await sendQuoteEmail(request.email, request.name, pdfPath, orderForEmail);
   } catch (e) {
-    console.error('❌ Customer email sending failed:', e);
+    console.error('❌ Customer email sending failed:', e.message || e);
   }
 
   // ── Delay 2s to respect Namecheap SMTP rate limit ───────────────
@@ -124,7 +124,7 @@ async function processOrder(request) {
     console.log(`[OrderService] Sending lead notification to admin email: ${process.env.ADMIN_EMAIL}`);
     await sendAdminNotification(orderForEmail);
   } catch (e) {
-    console.error('❌ Admin notification email failed:', e);
+    console.error('❌ Admin notification email failed:', e.message || e);
   }
 
   const pdfFilename = require('path').basename(pdfPath);

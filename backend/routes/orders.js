@@ -40,8 +40,9 @@ router.post('/', async (req, res) => {
     const order = await processOrder(request);
     return res.status(200).json(order);
   } catch (e) {
-    console.error('Order error:', e.message);
-    return res.status(400).json({ error: e.message });
+    console.error('Order error:', e);
+    const errorMessage = e.message || 'Database connection error or unknown error occurred.';
+    return res.status(400).json({ error: errorMessage });
   }
 });
 
